@@ -1,0 +1,20 @@
+{% extends "developer/_base.html" %}
+{% load static %}
+{% block title %} Détail - {{ developer.first_name }} {{developer.last_name }} {%  endblock title %}
+{% block content %}
+<div class="jumbotron p-3 m-3" >
+<form action="{% url 'developer:delete' developer.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="close"><i class="fa fa-trash"></i></button>
+    </form>
+<h1>{{ developer.first_name }} {{ developer.last_name }} </h1>
+<p>{{developer.tasks.all|length}}
+    tâche{{developer.tasks.all|length|pluralize}}
+    assignée{{developer.tasks.all|length|pluralize}}.</p>
+
+</div>
+
+{% include 'task/_create_task_modal.html' %} 
+</div>
+
+{% endblock content %}
